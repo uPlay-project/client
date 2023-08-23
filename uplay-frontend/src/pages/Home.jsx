@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import { ThemeContext } from "../context/theme.context";
 
-const Home = () => {
+function Home() {
+  const { theme } = useContext(ThemeContext);
   return (
-    <div>
-      <div className="home-content">
+      <div className={`home-content ${theme}`}>
         <h1>Welcome to uPlay!</h1>
-        <h3>Play your fav songs, build your playlist, and share with everyone!</h3>
+        <h3>Play your fav songs, build your playlist, and share with your friends!</h3>
       </div>
-    </div>
   );
 };
 
