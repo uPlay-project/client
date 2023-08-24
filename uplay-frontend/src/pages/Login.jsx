@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { ThemeContext } from "../context/theme.context";
 import { Link, useNavigate } from "react-router-dom";
  
  
@@ -8,6 +9,7 @@ function Login(props) {
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [successMessage, setSuccessMessage] = useState(undefined);
 
+  const { theme } = useContext(ThemeContext);
   
   const navigate = useNavigate();
  
@@ -21,7 +23,7 @@ function Login(props) {
   };
   
   return (
-    <div className="LoginPage">
+    <div className={`login ${theme}`}>
       <h1>Login</h1>
  
       <form onSubmit={handleLoginSubmit}>

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ThemeContext } from "../context/theme.context";
 import axios from "axios";
  
 const API_URL = "http://localhost:5005";
@@ -10,6 +11,8 @@ function Signup(props) {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  
+  const { theme } = useContext(ThemeContext);
  
   const navigate = useNavigate();
   
@@ -33,7 +36,7 @@ function Signup(props) {
  
   
   return (
-    <div className="SignupPage">
+    <div className={`signup ${theme}`}>
       <h1>Sign Up</h1>
  
       <form onSubmit={handleSignupSubmit}>
