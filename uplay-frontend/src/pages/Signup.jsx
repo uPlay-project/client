@@ -24,14 +24,14 @@ function Signup(props) {
   const handleSignupSubmit = (e) => {
     e.preventDefault()
 
-    const user = {name, email,password}
+    const user = {name, email,password};
     
     axios.post(`${API_URL}/auth/signup`, user)
         .then(response => {
-            console.log('response', response)
-            navigate("/login")
+            console.log('response', response);
+            navigate("/login");
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
   };
  
   
@@ -56,7 +56,7 @@ function Signup(props) {
           onChange={handlePassword}
         />
  
-        <label>Name:</label>
+        <label>Username:</label>
         <input 
           type="text"
           name="name"
