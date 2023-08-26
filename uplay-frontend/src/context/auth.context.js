@@ -10,7 +10,7 @@ export function AuthProviderWrapper({ children }) {
 
   const authenticateUser = async () => {
     const userPayload = await authService.getCurrentUser();
-    setIsLoggedIn(true);
+    setIsLoggedIn(userPayload !== null);
     setIsLoading(false);
     setUser(userPayload);
   };
