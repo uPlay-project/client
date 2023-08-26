@@ -5,58 +5,88 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  background-image: url('./assets/background-2');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.home {
+  width: 90%;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 15px;
+  border-radius: 5%;
+}
+
+.light .home {
+  background-color: #efeded;
+}
+
+.dark .home {
+  background-color: #18191a;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  margin-top: 20px;
 }
 
-.nav-container {
-  display: flex;
-  justify-content: space-between;
+.navbar {
   background-color: black;
   color: rgb(160, 60, 150);
   padding: 10px 20px;
   font-weight: 600;
-  border-bottom: 2px solid rgb(160, 60, 150);
+  border-bottom: 4px solid rgb(160, 60, 150);
 }
 
-.nav-container a {
-  list-style: none;
+.navbar a {
   text-decoration: none;
-  display: inline-block;
-  margin: 0px 20px;
   font-size: 1.2rem;
   color: rgb(160, 60, 150);
 }
 
-.light {
-  background-color: white;
-}
- 
-.dark {
-  background-color: #18191a;
+.navbar :hover {
+  color: rgb(250, 70, 232)
 }
 
-.nav-container.light {
-  background-color: #ffffff;
+.bg-light {
+  background-color: white !important;
 }
  
-.nav-container.dark {
-  background-color: #252526;
+.bg-dark {
+  background-color: #18191a !important;
 }
- 
+
+.logo-img {
+  width: 80px;
+  height: 80px;
+}
+
+.home-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 20%;
+}
+
+.theme-btn {
+  height: 35px;
+  width: 35px;
+  border-radius: 20%;
+}
+
 .light a,
 .light p,
 .light h1,
-.light h3 {
+.light h3,
+.light label {
   color: #000000;
 }
- 
+
 .dark a,
 .dark p,
 .dark h1,
-.dark h3 {
+.dark h3,
+.dark label {
   color: #ffffff;
 }
