@@ -21,7 +21,7 @@ function Navbar() {
                 <Link to="/profile" className={`nav-link ${theme}`}>My Profile</Link>
               </li>
               <li className="nav-item">
-                <Link to="/playlist" className={`nav-link ${theme}`}>My Playlists</Link>
+                <Link to="/playlist" className={`nav-link ${theme}`}>My Playlist</Link>
               </li>
               <li className="nav-item">
                 <Link to="/favourites" className={`nav-link ${theme}`}>My Fav's</Link>
