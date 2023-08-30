@@ -12,10 +12,13 @@ function AlbumList (){
   
 const getAlbum = async () => {
     try {
-        const response= await axios.get(`${API_URL}/api/album`);
-        console.log("what innit",response.data)
+        const response = await axios.get(`${API_URL}/api/album`);
+        console.log("what innit",response.data.getAlbumDb
+        )
         if(response.data) {
-            setAlbums(response.data)
+            setAlbums(response.data.getAlbumDb
+                )
+            console.log(typeof albums)
         }
         setIsloading(true)
 
@@ -33,13 +36,12 @@ useEffect(()=>{
 if(isLoading){
     <div>Isloading.....</div>
 }
-console.log(albums)
 
     return (
         <>
         <div>
         <h4>Album List</h4>
-        {Array.isArray(albums) && albums.map((album)=> (
+        {albums.map((album)=> (
            
             <div key={album.id}>
               

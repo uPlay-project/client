@@ -66,7 +66,7 @@ function AddTrack() {
       .catch((error) => {
         console.error("Error:", error);
         setUploadStatus("An error occurred while uploading.");
-        toast.error("Uploaded successfully");
+        toast.error("Uploaded not successfully");
       });
   };
 
