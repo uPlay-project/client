@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ThemeContext } from "../context/theme.context";
 import { AuthContext } from "../context/auth.context";
 import logoImage from '../assets/logo3.png';
+import ProfileImage from '../pages/ProfileImage';
 
 
 
@@ -13,7 +14,11 @@ import logoImage from '../assets/logo3.png';
 function Navbar() {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { isLoggedIn , user } = useContext(AuthContext);
-
+  const imgStyle = {
+    width: '100px',
+    height: '100px',
+    borderRadius: '75%',
+  }
   
 
   return (
@@ -21,7 +26,10 @@ function Navbar() {
     <nav className={`navbar navbar-expand-lg navbar-dark bg-black`}>
     
 {isLoggedIn && (
-  <h1>Welcome {user.username}</h1>
+  <div>
+    <h1>{user.username}</h1>
+    <img src={user.image} style={imgStyle} alt="profile_image" />
+  </div>
 )} 
       <Link to="/">
         <img className='logo-img' alt='logo' src={logoImage} />

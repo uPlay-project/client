@@ -19,9 +19,17 @@ function Home() {
           (
             <div>
               <Profile />
+              <Link to="/track" className={`btn btn-primary ${theme}`}>
+            
+              Add Track
+            </Link>
+            <Link to="/album" className={`btn btn-primary ${theme}`}>
+         
+              Add Album
+            </Link>
             </div>
           )}{" "}
-        :{" "}
+      {" "}
         {!isLoggedIn && (
           <>
             <h1>
