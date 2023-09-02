@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: 'http://localhost:5005',
+  withCredentials: true,
 });
 
 const signUp = async ({ name, email, password }) => {

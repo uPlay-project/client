@@ -5,12 +5,12 @@ import ProfileImage from "./ProfileImage";
 
 
 function Profile (){
-    const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+    const { isLoggedIn, user, logOutUser, setUser } = useContext(AuthContext);
     return (
         <>
          {isLoggedIn > 0 && (
         <div>
-          <ProfileImage/>
+        <ProfileImage user={user} setUser={setUser} />
    <p>{user.country}</p>
    <p>{user.state}</p>
 
