@@ -2,11 +2,12 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../context/theme.context";
 import { Input } from "antd";
-import axios from "axios";
 import "./Signup.css";
 import { toast } from "react-toastify";
+import authMethods from "../components/apiservices/auth.servic";
 
-const API_URL = "http://localhost:5005";
+
+
 
 function Signup(props) {
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -33,12 +34,31 @@ function Signup(props) {
   const handleSignupSubmit = (e) => {
     e.preventDefault();
 
+   
+
+    if (!form.email.includes("@")) {
+      toast.error("Email must contain '@' symbol.", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: true,
+      });
+      return;
+    }
+
+    const passwordStrengthRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    if (!passwordStrengthRegex.test(form.password)) {
+      toast.error("Password must have at least 6 characters, including one digit, one lowercase letter, and one uppercase letter.", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: true,
+      });
+      return;
+
+    }
+  
     const user = form;
 
-    axios
-      .post(`${API_URL}/auth/signup`, user)
-      .then((response) => {
-        console.log("response", response);
+authMethods.signUp(user)
+      .then(() => {
+        console.log("response");
         toast.success("Successully Signup", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: true,
@@ -46,6 +66,10 @@ function Signup(props) {
         navigate("/login");
       })
       .catch((err) => console.log(err));
+      toast.success("Signup failed. please your credentials", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: true,
+      });
   };
 
   return (

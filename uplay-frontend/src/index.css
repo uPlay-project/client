@@ -7,19 +7,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-image: url('./assets/background-2');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: crimson;
+  /* background-repeat: no-repeat;
+  background-size: cover; */
+  background-color: rgb(130, 94, 94);
 }
 
-.home {
+/* .home {
   width: 90%;
   max-width: 600px;
   margin: 50px auto;
   padding: 15px;
   border-radius: 5%;
-}
+} */
 
 .light .home {
   background-color: #efeded;
@@ -37,8 +36,9 @@ code {
 .navbar {
   background-color: black;
   color: rgb(160, 60, 150);
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
   font-weight: 600;
+  height: 6rem;
   border-bottom: 4px solid rgb(160, 60, 150);
 }
 
@@ -92,4 +92,58 @@ code {
 .dark label {
   color: #ffffff;
 }
+/* Add these styles to your main CSS file or use CSS modules */
+
+/* Styles for AudioPlayer.js */
+.audio-player {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #1e1e1e;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* Styles for DisplayTrack.js */
+.display-track {
+  display: flex;
+  align-items: center;
+}
+
+.audio-info {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.audio-image img {
+  max-width: 100px;
+  height: auto;
+  border-radius: 4px;
+}
+
+.audio-icon {
+  font-size: 48px;
+  color: #888;
+}
+
+/* Styles for ProgressBar.js */
+.progress {
+  display: flex;
+  align-items: center;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+/* Additional styles for Controls.js can vary depending on your design */
+p{
+  color: #ffffff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+}
+
 }

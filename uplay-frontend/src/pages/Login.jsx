@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { ThemeContext } from "../context/theme.context";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,38 +8,57 @@ import { toast } from "react-toastify";
 
 const API_URL = "http://localhost:5005";
 
-function Login(props) {
-  const [email, setEmail] = useState("");
+function Login() {
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(undefined);
-  const [successMessage, setSuccessMessage] = useState(undefined);
   const { isLoading, storeToken, authenticateUser } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
 
   const navigate = useNavigate();
 
-  const handleEmail = (e) => setEmail(e.target.value);
+  const handleIdentifier = (e) => {
+    setIdentifier(e.target.value);
+  };
   const handlePassword = (e) => setPassword(e.target.value);
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
 
-    const requestbody = { email: email, password: password };
-    axios.post(`${API_URL}/auth/login`, requestbody).then((response) => {
-      console.log("===show me login details==>", response);
-      storeToken(response.data.authToken);
-      authenticateUser();
-      navigate("/");
-      setSuccessMessage(response.data);
-      toast.success(" Successully LoggedIn", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: true,
+    const isEmail = identifier.includes("@");
+
+    const loginData = {
+      [isEmail ? "email" : "username"]: identifier,
+      password: password,
+    };
+
+    axios
+      .post(`${API_URL}/auth/login`, loginData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log("===show me login details==>", response);
+        storeToken(response.data.authToken);
+        authenticateUser();
+        navigate("/");
+     
+        toast.success("Successfully Logged In", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: true,
+        });
+      })
+      .catch((error) => {
+        console.error("Login error:", error);
+        toast.error("Login failed. Please check your credentials.", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: true,
+        });
       });
-    });
   };
 
   if (isLoading) {
-    <div>Loading...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
@@ -48,12 +67,12 @@ function Login(props) {
 
       <form onSubmit={handleLoginSubmit}>
         <div>
-          <label>Email</label>
+          <label>Email or Username</label>
           <Input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleEmail}
+            type="attribute"
+            name="identifier"
+            value={identifier}
+            onChange={handleIdentifier}
             required
           />
         </div>
@@ -72,12 +91,13 @@ function Login(props) {
           <button type="submit">Login</button>
         </div>
       </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-      {successMessage && <p>{successMessage}</p>}
+    
       <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+      <Link to="/signup"> Sign Up</Link>
     </div>
   );
+
+
 }
 
 export default Login;

@@ -66,7 +66,7 @@ function AddTrack() {
       .catch((error) => {
         console.error("Error:", error);
         setUploadStatus("An error occurred while uploading.");
-        toast.error("Uploaded not successfully");
+        toast.error("Track Upload Failed ");
       });
   };
 
@@ -112,7 +112,7 @@ function AddTrack() {
             <label>Upload MP3 File</label>
             <Input
               type="file"
-              accept=".mp3"
+          
               onChange={handleFileChange}
               name="mp3file"
             />
@@ -142,3 +142,4 @@ function AddTrack() {
 }
 
 export default AddTrack;
+
