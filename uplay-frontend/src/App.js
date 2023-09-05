@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Album from "./components/AddAlbum";
 import AddTrack from "./components/AddTrack";
 import AlbumList from "./pages/AlbumList";
+import Profile from "./pages/Profile";
 // import IsPrivate from "./components/IsPrivate"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -20,6 +21,7 @@ function App() {
       <Routes>
       <Route path="/track" element={<AddTrack/>}/>
       <Route path="/album/list" element={<AlbumList/>}/>
+      <Route path="/profile/:username" element={<Profile/>}/>
         <Route path="/album" element={<Album/>}/>
         <Route exact path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
