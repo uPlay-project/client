@@ -36,10 +36,10 @@ function AddTrack() {
 
     const formDataToSend = new FormData();
 
-    // Append the selected file
+
     formDataToSend.append("mp3file", selectedFile);
 
-    // Append other form fields
+
     Object.keys(form).forEach((key) => {
       formDataToSend.append(key, form[key]);
     });
@@ -142,4 +142,3 @@ function AddTrack() {
 }
 
 export default AddTrack;
-

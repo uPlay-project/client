@@ -3,28 +3,30 @@ import { AuthContext } from "../context/auth.context";
 import { Link } from "react-router-dom";
 import ProfileImage from "./ProfileImage";
 
-
-function Profile (){
-    const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-    return (
-        <>
-         {isLoggedIn > 0 && (
+function Profile() {
+  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  return (
+    <>
+      {isLoggedIn > 0 && (
         <div>
-          <ProfileImage/>
-   <p>{user.country}</p>
-   <p>{user.state}</p>
+           <ProfileImage/> 
 
-   <button onClick={logOutUser}>Logout</button>
+          <h2>{user.username}</h2>
+          <p>{user.country}</p>
+          <p>{user.state}</p>
+          <div>
+            <button onClick={logOutUser}>Logout</button>
+          </div>
         </div>
-         )}
-         {!isLoggedIn && (
+      )}
+      {!isLoggedIn && (
         <>
           <Link to="/signup">Sign Up</Link>
           <Link to="/login">Login</Link>
         </>
       )}
-        </>
-    )
+    </>
+  );
 }
 
 export default Profile;

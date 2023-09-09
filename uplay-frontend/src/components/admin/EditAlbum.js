@@ -35,7 +35,7 @@ const EditAlbum = () => {
           popularity: fetchedAlbum.popularity,
           album_type: fetchedAlbum.album_type,
         });
-        setSelectedTracks(fetchedAlbum.trackIds || []); // Initialize as an empty array
+        setSelectedTracks(fetchedAlbum.trackIds || []);
         setIsLoading(false);
       })
       .catch((error) => {

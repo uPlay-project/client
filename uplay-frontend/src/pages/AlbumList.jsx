@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Row } from "antd";
@@ -9,6 +11,9 @@ const API_URL = "http://localhost:5005";
 function AlbumList() {
   const [albums, setAlbums] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+
+
 
 
   const getAlbums = async () => {
@@ -36,9 +41,6 @@ function AlbumList() {
     getAlbums();
   }, []);
 
-
-
-  
 
 
   return (

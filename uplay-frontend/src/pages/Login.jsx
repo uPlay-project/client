@@ -4,7 +4,7 @@ import { ThemeContext } from "../context/theme.context";
 import { Link, useNavigate } from "react-router-dom";
 import { Input } from "antd";
 import axios from "axios";
-import { toast } from "react-toastify";
+import {  message } from "antd";
 
 const API_URL = "http://localhost:5005";
 
@@ -43,17 +43,11 @@ function Login() {
         authenticateUser();
         navigate("/");
      
-        toast.success("Successfully Logged In", {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: true,
-        });
+        message.success("Successfully LoggedIn")
       })
       .catch((error) => {
         console.error("Login error:", error);
-        toast.error("Login failed. Please check your credentials.", {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: true,
-        });
+        message.error("Login failed. Please check your credentials.")
       });
   };
 
