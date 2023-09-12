@@ -10,7 +10,7 @@ const AlbumDetail = ({ album, refreshAlbumList, onAddToLibrary }) => {
  
 
   const [isAddingToLibrary, setIsAddingToLibrary] = useState(false);
-  const { user, storedToken } = useContext(AuthContext); 
+  const { user, storedToken, isLoggedIn } = useContext(AuthContext); 
   const api = axios.create({
     baseURL: "http://localhost:5005",
     headers: {
@@ -70,49 +70,53 @@ const AlbumDetail = ({ album, refreshAlbumList, onAddToLibrary }) => {
 
   return (
     <div>
-      <Col>
-        <Link to={`/album/${album._id}`}>
-          <Card
-            title={album.title}
-            style={{ width: 230, height: 300, margin: 10 }}
-          >
-            <img src={album.image} alt="" height={150} />
+      <>
+      {isLoggedIn > 0 && (
+      <><Col>
+            <Link to={`/album/${album._id}`}>
+              <Card
+                title={album.title}
+                style={{ width: 230, height: 300, margin: 10 }}
+              >
+                <img src={album.image} alt="" height={150} />
 
-            <ul className="album-info">
-              <li>Total Tracks: {album.total_tracks}</li>
-              <li>Release Date: {album.release_date}</li>
-              <li>Genre: {album.genre}</li>
-              <li>Popularity: {album.popularity}</li>
-              <li>Artists: {album.artist.map((artist) => artist.name).join(", ")}</li>
-              <li>Album Type: {album.album_type}</li>
-            </ul>
-          </Card>
-        </Link>
-      </Col>
-      <div>
-        <Button
-          className="add-to-library-button"
-          onClick={() => handleAddToLibrary(album._id)}
-          loading={isAddingToLibrary}
-          disabled={isAddingToLibrary}
-        >
-          {isAddingToLibrary ? "Adding..." : "Add to Library"}
-        </Button>
-      </div>
-      <div>
-        <button
-          className="delete-button"
-          onClick={() => deleteAlbum(album._id)}
-        >
-          Delete from Library
-        </button>
-      </div>
-      <div>
-        <Link to={`/edit/album/${album._id}`}>
-          <button className="edit-button">Edit Album</button>
-        </Link>
-      </div>
-     
+                <ul className="album-info">
+                  <li>Total Tracks: {album.total_tracks}</li>
+                  <li>Release Date: {album.release_date}</li>
+                  <li>Genre: {album.genre}</li>
+                  <li>Popularity: {album.popularity}</li>
+                  <li>Artists: {album.artist.map((artist) => artist.name).join(", ")}</li>
+                  <li>Album Type: {album.album_type}</li>
+                </ul>
+              </Card>
+            </Link>
+          </Col><div>
+              <Button
+                className="add-to-library-button"
+                onClick={() => handleAddToLibrary(album._id)}
+                loading={isAddingToLibrary}
+                disabled={isAddingToLibrary}
+              >
+                {isAddingToLibrary ? "Adding..." : "Add to Library"}
+              </Button>
+            </div></>
+      )}</>
+      <>
+      {!isLoggedIn  && (
+      <><div>
+
+            <button
+              className="delete-button"
+              onClick={() => deleteAlbum(album._id)}
+            >
+              Delete from Library
+            </button>
+          </div><div>
+              <Link to={`/edit/album/${album._id}`}>
+                <button className="edit-button">Edit Album</button>
+              </Link>
+            </div></>
+     )}</>
     </div>
   );
 };

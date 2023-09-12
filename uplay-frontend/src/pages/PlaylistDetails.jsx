@@ -1,32 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { useParams } from "react-router-dom";
-
-const API_URL = 'http://localhost:5005';
+import { useParams } from 'react-router-dom';
+import { AuthContext } from '../context/auth.context';
 
 const PlaylistDetails = () => {
   const { playlistId } = useParams();
-  console.log("playlistId", playlistId)
   const [playlist, setPlaylist] = useState(null);
   const [error, setError] = useState(null);
+  const { storedToken } = useContext(AuthContext);
+  const api = axios.create({
+    baseURL: 'http://localhost:5005',
+    headers: {
+      Authorization: `Bearer ${storedToken}`,
+    },
+  });
 
   const getPlaylist = async () => {
     try {
-      const storedToken = localStorage.getItem("authToken");
-      const response = await axios.get(`${API_URL}/api/playlist/${playlistId}`, {
-        headers: {
-          Authorization: `Bearer ${storedToken}`,
-        },
-      });
-
+      const response = await api.get(`/api/playlist/${playlistId}`);
       setPlaylist(response.data);
-    } catch (error) { 
+    } catch (error) {
       setError(error.message || 'An error occurred while fetching the playlist.');
     }
   };
 
   useEffect(() => {
-    getPlaylist(); 
+    getPlaylist();
   }, [playlistId]);
 
   if (error) {
@@ -37,16 +36,21 @@ const PlaylistDetails = () => {
     return <div>Loading...</div>;
   }
 
+  // Check if playlist.tracks is defined before mapping
+  if (!playlist.tracks) {
+    return <div>No tracks available for this playlist.</div>;
+  }
+
   return (
     <div>
       <h2>Playlist Details</h2>
-      <p>ID: {playlist._id}</p>
+
       <p>Name: {playlist.name}</p>
       <p>Description: {playlist.description}</p>
 
       <h3>Tracks</h3>
-      {/* <ul>
-        {playlist.track.map((track) => (
+      <ul>
+        {playlist.tracks.map((track) => (
           <li key={track._id}>
             <p>Track Name: {track.name}</p>
             <p>Duration: {track.duration} seconds</p>
@@ -58,7 +62,7 @@ const PlaylistDetails = () => {
             </audio>
           </li>
         ))}
-      </ul> */}
+      </ul>
     </div>
   );
 };

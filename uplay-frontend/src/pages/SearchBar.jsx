@@ -14,7 +14,9 @@ function SearchBar() {
   const [error, setError] = useState(null);
 
 
-  const {storedToken } = useContext(AuthContext); 
+
+  const storedToken = localStorage.getItem("authToken")
+
   const api = axios.create({
     baseURL: "http://localhost:5005",
     headers: {
@@ -27,7 +29,7 @@ function SearchBar() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await api.get(`/search?term=${searchTerm}`);
+        const response = await api.get(`/api/search?term=${searchTerm}`);
         if (!response.ok) {
           throw new Error(`Request failed with status: ${response.status}`);
         }

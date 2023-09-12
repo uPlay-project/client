@@ -1,18 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button, Table, Space, Popconfirm, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../context/auth.context";
 
-const API_URL = "http://localhost:5005";
+
 
 function Artists() {
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const {  storedToken, isLoggedIn } = useContext(AuthContext); 
+  const api = axios.create({
+    baseURL: "http://localhost:5005",
+    headers: {
+      Authorization: `Bearer ${storedToken}`, 
+    },
+  });
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}/api/artist`)
+    api
+      .get('/api/artist')
       .then((response) => {
         setArtists(response.data.artists);
         setLoading(false);
@@ -24,7 +32,7 @@ function Artists() {
 
   const handleDelete = async (artistId) => {
     try {
-      await axios.delete(`${API_URL}/api/artist/${artistId}`);
+      await api.delete(`/api/artist/${artistId}`);
       message.success("Artist deleted successfully");
       setArtists((prevArtists) =>
         prevArtists.filter((artist) => artist._id !== artistId)

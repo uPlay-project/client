@@ -14,59 +14,46 @@ function Home() {
 
   return (
     <>
-      <div
-            // style={{
-            //   backgroundImage: `url(${backgroundImag})`,
-            //   backgroundPosition: "center",
-            //   backgroundRepeat: "no-repeat",
-            //   backgroundSize: "cover",
-            //   height: 550,
-            //   // width: 100,
-            // }}
-          >
-      <div
-        className={`home ${theme} d-flex justify-content-center align-items-center homepage`}
-      ></div>
-      {isLoggedIn > 0 && <><SearchBar /><MusicHome /></>} 
+      {isLoggedIn > 0 && (
+        <>
+          <SearchBar />
+          <MusicHome />
+          <h2>Recently Added</h2>
+        </>
+      )}
       {!isLoggedIn && (
-      
-        
-            <div  style={{
-              backgroundImage: `url(${backgroundImag})`,
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              height: 550,
-            
-              // width: 100,
-            }} ><ul className={`home-list ${theme}`}>
+        <div
+          style={{
+            backgroundImage: `url(${backgroundImag})`,
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            height: 550,
+
+          }}
+        >
+          <ul className={`home-list ${theme}`}>
             <li>Play your favorite songs</li>
             <li>Build your playlist</li>
             <li>Share with your friends</li>
-          </ul><Link to="/admin" className={`btn btn-primary`}>
-              Admin Page
-            </Link><br></br><Link to="/signup" className={`btn btn-primary ${theme}`}>
-              Sign Up
-            </Link><Link to="/login" className={`btn btn-secondary ${theme}`}>
-              Login
-            </Link></div>
-         
-      
-        
+          </ul>
+          <Link to="/admin" className={`btn btn-primary`}>
+            Admin Page
+          </Link>
+          <br></br>
+          <Link to="/signup" className={`btn btn-primary ${theme}`}>
+            Sign Up
+          </Link>
+          <Link to="/login" className={`btn btn-secondary ${theme}`}>
+            Login
+          </Link>
+        </div>
       )}
-       </div>
     </>
   );
 }
 
 export default Home;
-
-
-
-
-
-
-
 
 // import React, { useContext } from "react";
 // import { ThemeContext } from "../context/theme.context";

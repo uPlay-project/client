@@ -39,7 +39,7 @@ function App() {
       <Routes>       
       <Route path="/edit/artist/:artistId" element={<EditArtist/>} />
          <Route path="/playlist" element={<Playlist />} />
-      <Route  path="playlist/:playlistId"  element={<PlaylistDetails />} />
+      <Route  path="/playlist/:playlistId"  element={<PlaylistDetails />} />
       <Route path="/songs" element={<Songs/>} />
       <Route path="/artist" element={<ArtistList/>} />
       <Route path="/artist/:artistId/album" element={<ArtistAlbums />} />
