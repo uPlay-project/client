@@ -6,10 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  /* background-repeat: no-repeat;
-  background-size: cover; */
-  background-color: rgb(130, 94, 94);
+  background-color: white;
 }
 
 /* .home {
@@ -92,9 +89,7 @@ code {
 .dark label {
   color: #ffffff;
 }
-/* Add these styles to your main CSS file or use CSS modules */
 
-/* Styles for AudioPlayer.js */
 .audio-player {
   display: flex;
   align-items: center;
@@ -104,7 +99,7 @@ code {
   font-family: Arial, sans-serif;
 }
 
-/* Styles for DisplayTrack.js */
+
 .display-track {
   display: flex;
   align-items: center;
@@ -137,13 +132,10 @@ input[type="range"] {
   width: 100%;
 }
 
-/* Additional styles for Controls.js can vary depending on your design */
+
 p{
   color: #ffffff;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: #ffffff;
-}
 
 }

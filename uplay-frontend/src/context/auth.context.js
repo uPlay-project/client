@@ -78,6 +78,7 @@ function AuthProviderWrapper({ children }) {
         storeToken,
         authenticateUser,
         logOutUser,
+        setIsLoading,
       }}
     >
       {children}

@@ -258,9 +258,6 @@ export default Album;
 
 
 
-
-
-
 // import axios from "axios";
 // import React, { useState, useEffect } from "react";
 // import { Input, Select, Button } from "antd";
@@ -283,7 +280,7 @@ export default Album;
 //     popularity: 0,
 //     artist: "",
 //     album_type: "",
-//     trackIds: [],
+//     trackId: [],
 //   };
 
 //   const [formData, setFormData] = useState(initForm);
@@ -292,7 +289,7 @@ export default Album;
 //   const navigate = useNavigate();
 
 //   useEffect(() => {
-//     
+    
 //     axios
 //       .get(`${API_URL}/api/track`)
 //       .then((response) => {
@@ -328,7 +325,7 @@ export default Album;
 //     const isChecked = e.target.checked;
 
 //     setFormData((prevForm) => {
-//       let updatedTrackIds = [...prevForm.trackIds];
+//       let updatedTrackIds = [...prevForm.trackId];
 
 //       if (isChecked) {
 //         updatedTrackIds.push(trackId);
@@ -336,7 +333,7 @@ export default Album;
 //         updatedTrackIds = updatedTrackIds.filter((id) => id !== trackId);
 //       }
 
-//       return { ...prevForm, trackIds: updatedTrackIds };
+//       return { ...prevForm, trackId: updatedTrackIds };
 //     });
 //   };
 
@@ -349,19 +346,19 @@ export default Album;
 //     Object.keys(formData).forEach((key) => {
 //       if (
 //         key !== "image" &&
-//         key !== "trackIds" &&
-//         formData[key] !== "" &&
-//         formData[key] !== 0
+//         key !== "trackId" &&
+//         formData[key] !== "" 
 //       ) {
 //         formDataToSend.append(key, formData[key]);
 //       }
 //     });
 
-//    
-//     formDataToSend.append("trackIds", JSON.stringify(formData.trackIds));
+//     formDataToSend.append("trackId", JSON.stringify(formData.trackId));
+//     console.log("formDataToSend", formDataToSend);
 
 //     try {
 //       const response = await axios.post(`${API_URL}/api/album`, formDataToSend);
+//       console.log("album response", response);
 //       toast.success("Album Successfully uploaded", {
 //         position: toast.POSITION.TOP_CENTER,
 //         autoClose: true,
@@ -489,7 +486,7 @@ export default Album;
 //                   <label>
 //                     <input
 //                       type="checkbox"
-//                       name="trackIds"
+//                       name="trackId"
 //                       value={track._id}
 //                       onChange={handleTrackCheckboxChange}
 //                     />
@@ -508,10 +505,12 @@ export default Album;
 //         </form>
 
 //         <Link to="/edit/album" className={`btn btn-primary `}>
-//          
+         
 //           edit album
 //         </Link>
 //       </div>
+   
+
 //     </>
 //   );
 // }

@@ -36,6 +36,7 @@ function ArtistAlbums() {
           ))
         )}
       </ul>
+      
     </div>
   );
 }

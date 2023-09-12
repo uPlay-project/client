@@ -1,75 +1,50 @@
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../context/theme.context";
-import { Input } from "antd";
-import "./Signup.css";
-import { toast } from "react-toastify";
+import { Input, message } from "antd";
 import authMethods from "../components/apiservices/auth.servic";
+import "./Signup.css";
 
-
-
-
-function Signup(props) {
-  const [errorMessage, setErrorMessage] = useState(undefined);
-
-  const initForm = {
+function Signup() {
+  const [form, setForm] = useState({
     email: "",
     password: "",
-    username:"",
+    username: "",
     country: "",
     state: "",
-  };
-  const [form, setForm] = useState(initForm);
+  });
 
   const { theme } = useContext(ThemeContext);
-
   const navigate = useNavigate();
 
-  const handleForm = (e) => {
-    const inputName = e.target.name;
-    const inputValue = e.target.value;
-    setForm((prevForm) => ({ ...prevForm, [inputName]: inputValue }));
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
 
-  const handleSignupSubmit = (e) => {
+  const handleSignupSubmit = async (e) => {
     e.preventDefault();
 
-   
-
     if (!form.email.includes("@")) {
-      toast.error("Email must contain '@' symbol.", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: true,
-      });
+      message.error("Email must contain '@' symbol.");
       return;
     }
 
     const passwordStrengthRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
     if (!passwordStrengthRegex.test(form.password)) {
-      toast.error("Password must have at least 6 characters, including one digit, one lowercase letter, and one uppercase letter.", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: true,
-      });
+      message.error("Password must have at least 6 characters, including one digit, one lowercase letter, and one uppercase letter.");
       return;
-
     }
-  
-    const user = form;
 
-authMethods.signUp(user)
-      .then(() => {
-        console.log("response");
-        toast.success("Successully Signup", {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: true,
-        });
-        navigate("/login");
-      })
-      .catch((err) => console.log(err));
-      toast.success("Signup failed. please your credentials", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: true,
-      });
+    try {
+      const user = form;
+      await authMethods.signUp(user);
+      message.success("Successfully signed up!");
+      navigate("/login");
+    } catch (error) {
+      message.error("Signup failed. Please check your credentials.");
+      console.error(error);
+    }
   };
 
   return (
@@ -83,21 +58,19 @@ authMethods.signUp(user)
             type="text"
             name="username"
             value={form.username}
-            onChange={handleForm}
+            onChange={handleFormChange}
             required
           />
         </div>
-
-       
 
         <div className="inputstyle">
           <label>Email</label>
           <Input
             className="input-formstyle"
-            type="text"
+            type="email"
             name="email"
             value={form.email}
-            onChange={handleForm}
+            onChange={handleFormChange}
             required
           />
         </div>
@@ -109,7 +82,7 @@ authMethods.signUp(user)
             type="password"
             name="password"
             value={form.password}
-            onChange={handleForm}
+            onChange={handleFormChange}
             required
           />
         </div>
@@ -121,7 +94,7 @@ authMethods.signUp(user)
             type="text"
             name="country"
             value={form.country}
-            onChange={handleForm}
+            onChange={handleFormChange}
             required
           />
         </div>
@@ -133,7 +106,7 @@ authMethods.signUp(user)
             type="text"
             name="state"
             value={form.state}
-            onChange={handleForm}
+            onChange={handleFormChange}
             required
           />
         </div>
@@ -145,12 +118,20 @@ authMethods.signUp(user)
         </div>
       </form>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Already have account?</p>
-      <Link to={"/login"}> Login here!</Link>
+      <p>Already have an account? <Link to="/login">Login here!</Link></p>
     </div>
   );
 }
 
 export default Signup;
+
+
+
+
+
+
+
+
+
+
+
